@@ -12,9 +12,17 @@ async function findById(id) {
   });
 }
 
+async function create(product) {
+  return new Promise((resolve, reject) => {
+    products.products.push(product);
+    resolve();
+  });
+}
+
 const ProductModel = {
   find,
   findById,
+  create,
 };
 
 module.exports = ProductModel;

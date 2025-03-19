@@ -6,7 +6,24 @@ async function get(req, res) {
     res.writeHead(200, "Content-Type", "application/json");
     res.write(JSON.stringify(products));
     res.end();
-  } catch (error) {}
+  } catch (error) {
+    console.log(error);
+  }
+}
+
+async function post(req, res) {
+  try {
+    await ProductModel.create({
+      id: Date.now(),
+      title: "mohammad data",
+      price: 250000,
+    });
+    res.writeHead(201, "Content-Type", "application/json");
+    res.write(JSON.stringify({ message: "products success create!!" }));
+    res.end();
+  } catch (error) {
+    console.log(error);
+  }
 }
 
 async function getById(req, res) {
@@ -27,9 +44,11 @@ async function getById(req, res) {
       res.write(JSON.stringify(product));
       res.end();
     }
-  } catch (error) {}
+  } catch (error) {
+    console.log(error);
+  }
 }
 
-const ProductsController = { get, getById };
+const ProductsController = { get, getById, post };
 
 module.exports = ProductsController;
