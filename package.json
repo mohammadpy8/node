@@ -1,15 +1,17 @@
 {
   "name": "node",
   "version": "1.0.0",
-  "main": "index.js",
+  "main": "server.js",
   "scripts": {
-    "dev": "nodemon node index.js",
-    "start": "node index.js"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon node server.js"
   },
+  "keywords": [],
   "author": "",
   "license": "ISC",
   "description": "",
-  "devDependencies": {
+  "dependencies": {
+    "mongodb": "^6.15.0",
     "nodemon": "^3.1.9"
   }
 }
