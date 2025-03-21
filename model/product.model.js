@@ -19,10 +19,31 @@ async function create(product) {
   });
 }
 
+async function update(id, payload) {
+  return new Promise((resolve, reject) => {
+    products.products.map((product) => {
+      if (product.id === id) {
+        Object.assign(product, payload);
+      }
+      return product;
+    });
+    resolve({ message: "products updated succesfully" });
+  });
+}
+
+async function remove(id) {
+  return new Promise((resolve, reject) => {
+    const newList = products.products.filter((product) => product.id !== id);
+    resolve({ message: "products deleted succesfully" });
+  });
+}
+
 const ProductModel = {
   find,
   findById,
   create,
+  update,
+  remove,
 };
 
 module.exports = ProductModel;
