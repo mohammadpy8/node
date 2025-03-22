@@ -1,14 +1,22 @@
 {
   "name": "node",
   "version": "1.0.0",
-  "main": "server.js",
+  "main": "singelton.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "nodemon node delete.js"
+    "start": "nodemon node singelton.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mohammadpy8/node.git"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/mohammadpy8/node/issues"
+  },
+  "homepage": "https://github.com/mohammadpy8/node#readme",
   "description": "",
   "dependencies": {
     "mongodb": "^6.15.0",
