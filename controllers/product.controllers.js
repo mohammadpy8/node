@@ -19,8 +19,8 @@ async function post(req, res) {
     });
     req.on("end", async () => {
       const products = {
-        id: Date.now(),
         ...JSON.parse(body),
+        createdAt: new Date(),
       };
       const response = await ProductModel.create(products);
       res.writeHead(201, "Content-Type", "application/json");

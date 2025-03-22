@@ -11,6 +11,7 @@ const server = http.createServer((req, res) => {
   } else if (url.match(routerMatcher) && method === "GET") {
     ProductsController.getById(res, req);
   } else if (url === apiRoute && req.method === "POST") {
+    console.log("aaaaa", req.method);
     ProductsController.post(res, req);
   } else if (url.match(routerMatcher) && method === "PUT") {
     ProductsController.update(res, req);

@@ -1,40 +1,55 @@
-const products = require("../data/products.json");
+const ConnectToMongoDB = require("../utils/mongo-connection");
+const { ObjectId } = require("mongodb");
+
+const productCollection = "product";
 
 async function find() {
-  return new Promise((resolve, reject) => {
-    resolve(products.products);
+  const db = await new ConnectToMongoDB().getDB();
+  return new Promise(async (resolve, reject) => {
+    const products = await db
+      .collection(productCollection)
+      .find({}, { sort: { _id: -1 } })
+      .toArray();
+    resolve(products);
   });
 }
 
 async function findById(id) {
-  return new Promise((resolve, reject) => {
-    resolve(products.products.find((p) => p.id === id));
+  const db = await new ConnectToMongoDB().getDB();
+  return new Promise(async (resolve, reject) => {
+    const products = await db.collection(productCollection).findOne({ _id: new ObjectId(id) });
+    resolve(products);
   });
 }
 
 async function create(product) {
-  return new Promise((resolve, reject) => {
-    products.products.push(product);
-    resolve();
+  const db = await new ConnectToMongoDB().getDB();
+  return new Promise(async (resolve, reject) => {
+    const result = await db.collection(productCollection).insertOne(product);
+    resolve(result);
   });
 }
 
 async function update(id, payload) {
-  return new Promise((resolve, reject) => {
-    products.products.map((product) => {
-      if (product.id === id) {
-        Object.assign(product, payload);
+  const db = await new ConnectToMongoDB().getDB();
+  return new Promise(async (resolve, reject) => {
+    const result = await db.collection(productCollection).updateOne(
+      { _id: new ObjectId(id) },
+      {
+        $set: {
+          ...payload,
+        },
       }
-      return product;
-    });
-    resolve({ message: "products updated succesfully" });
+    );
+    resolve(result);
   });
 }
 
 async function remove(id) {
-  return new Promise((resolve, reject) => {
-    const newList = products.products.filter((product) => product.id !== id);
-    resolve({ message: "products deleted succesfully" });
+  const db = await new ConnectToMongoDB().getDB();
+  return new Promise(async (resolve, reject) => {
+    const result = await db.collection(productCollection).deleteOne({ _id: new ObjectId(id) });
+    resolve(result);
   });
 }
 
