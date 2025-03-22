@@ -15,7 +15,8 @@ async function main() {
   const resultId = await userCollection.deleteOne({
     _id: new ObjectId("aaa"),
   });
-  console.log("res-->", result, resultId);
+  const deleteMany = userCollection.deleteMany({ firstName: "mohammad" });
+  const findAndDelete = userCollection.findOneAndDelete({ firstName: "mohammad" });
 }
 
 main();
