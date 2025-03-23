@@ -1,6 +1,5 @@
 const { createReadStream, statSync } = require("fs");
 const http = require("http");
-// const {} = require("util");
 
 const fileName = "./dance.mp4";
 
